@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    RewriteCond %{REQUEST_URI} ^/logs$
+    RewriteRule ^ APIs/storage/logs/index.php [NC,L]
+
+    RewriteCond %{REQUEST_URI} !^.*/APIs/storage/logs/index.php$
+    RewriteCond %{REQUEST_URI} !^.*/APIs/public/index\.php$
+    RewriteCond %{REQUEST_URI} ^(.*)/APIs/.*\.php$
+    RewriteRule ^.*\.php$ %1 [NC,L,R=301]
+
+    RewriteRule ^/?$ APIs/public/index.php [NC,L]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^.*$ APIs/public/index.php [NC,L]
+</IfModule>

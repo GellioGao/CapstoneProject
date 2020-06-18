@@ -1,0 +1,11 @@
+{
+  "name": "Capstone-2020",
+  "version": "0.1.0",
+  "description": "A documentation that describe the APIs.",
+  "title": "Capstone 2020 API Document",
+  "url" : "https://www.capstone.com/v1",
+  "order": [
+    "Root",
+    "Member"
+  ]
+}
